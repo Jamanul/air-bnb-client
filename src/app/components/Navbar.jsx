@@ -1,39 +1,39 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import { FaAirbnb } from "react-icons/fa6";
+import { FaAirbnb, FaMagnifyingGlass } from "react-icons/fa6";
 import { TfiWorld } from "react-icons/tfi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import Image from "next/image";
-import Calender from "./Calender";
 
+import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { addDays } from "date-fns";
 import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 
 const Navbar = () => {
-    const [startTimes,setStartTimes]=useState('')
-    const [endTimes,setEndTimes]=useState('')
+  const [startTimes, setStartTimes] = useState("");
+  const [endTimes, setEndTimes] = useState("");
   const [state, setState] = useState([
     {
       startDate: new Date(),
       endDate: addDays(new Date(), 7),
       key: "selection",
     },
-]);
-  console.log(state)
-  const startTime = state[0].startDate.toLocaleDateString('en-CA', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric'
-  })
-  const endTime = state[0].endDate.toLocaleDateString('en-CA', {
-    year: 'numeric',
-    month: 'numeric',
-    day: 'numeric'
-  })
+  ]);
+  console.log(state);
+  const startTime = state[0].startDate.toLocaleDateString("en-CA", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
+  const endTime = state[0].endDate.toLocaleDateString("en-CA", {
+    year: "numeric",
+    month: "numeric",
+    day: "numeric",
+  });
   //console.log(startTime,endTime)
   const [place, setPlace] = useState("");
   const [placeButton, setPlaceButton] = useState(false);
@@ -44,8 +44,8 @@ const Navbar = () => {
   const handleCalender = () => {
     setIsLocationVisible(false);
     setIsCalenderVisible(!isCalenderVisible);
-    setEndTimes(endTime)
-    setStartTimes(startTime)
+    setEndTimes(endTime);
+    setStartTimes(startTime);
   };
   //handle location div show and not shown
   const handleLocationDiv = () => {
@@ -103,7 +103,7 @@ const Navbar = () => {
       {/* search section */}
       <div
         className={`${
-          isLocationVisible ? "bg-gray-300" : ""
+          isLocationVisible || isCalenderVisible ? "bg-gray-300" : ""
         } border relative shadow-md  max-w-[800px] mx-auto rounded-r-full rounded-l-full`}
       >
         <form className="grid grid-cols-10">
@@ -124,6 +124,8 @@ const Navbar = () => {
                 defaultValue={place}
                 className={`${
                   isLocationVisible ? "group-hover:bg-white" : ""
+                } ${
+                  isCalenderVisible ? "bg-gray-300" : ""
                 } focus:outline-none text-sm group-hover:bg-slate-300`}
                 placeholder="Search destinations"
               />
@@ -166,18 +168,33 @@ const Navbar = () => {
           )}
           {/* check in and checkout section */}
           <div onClick={handleCalender} className="group col-span-2 ">
-            <div className=" py-4  hover:my-0 px-7 flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full">
+            <div
+              className={`${
+                isCalenderVisible
+                  ? "bg-white group-hover:rounded-r-none group-hover:bg-white"
+                  : ""
+              } py-4  hover:my-0 px-7 flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full`}
+            >
               <h2 className="text-sm font-bold">Check in</h2>
-              <h2 className="text-sm font-bold text-gray-500">{state && startTimes.length>0 ? startTime : "Add date"}</h2>
+              <h2 className="text-sm font-bold text-gray-500">
+                {state && startTimes.length > 0 ? startTime : "Add date"}
+              </h2>
             </div>
           </div>
           <div onClick={handleCalender} className="group col-span-2 ">
-            <div className=" py-4  hover:my-0 px-7 flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full">
+            <div
+              className={`${
+                isCalenderVisible
+                  ? "bg-white rounded-r-full rounded-l-none group-hover:bg-white "
+                  : ""
+              } py-4  hover:my-0 px-7 flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full`}
+            >
               <h2 className="text-sm font-bold">Check out</h2>
-              <h2 className="text-sm font-bold text-gray-500">{state && endTimes.length>0 ? endTime : "Add date"}</h2>
+              <h2 className="text-sm font-bold text-gray-500">
+                {state && endTimes.length > 0 ? endTime : "Add date"}
+              </h2>
             </div>
           </div>
-          <div className="col-span-3"></div>
           {isCalenderVisible && (
             <div
               ref={calenderDivRef}
@@ -197,6 +214,64 @@ const Navbar = () => {
               />
             </div>
           )}
+          {/* add people section */}
+          <div className="group  hover:bg-slate-300 flex justify-between px-2 hover:rounded-r-full hover:rounded-l-full items-center col-span-3">
+            <div className="py-4 hover:my-0  flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full">
+              <h2 className="text-sm font-bold">Who</h2>
+              <h2 className="text-sm font-bold text-gray-500">
+                Add Guests
+              </h2>
+            </div>
+            <div className="pr-2">
+            <button className="p-4 flex items-center gap-1 rounded-full bg-primary text-white"><FaMagnifyingGlass/><span className={`${isCalenderVisible||isLocationVisible? "inline opacity-100 ":"opacity-0  hidden"} transition-opacity duration-300 ease-in-out `}>Search</span></button>
+            </div>
+          </div>
+          <div className="max-w-[400px] right-0 bg-white shadow-md px-6 py-4 rounded-3xl mt-20 absolute">
+            <div className="flex w-80 py-4 mx-2 border-b justify-between">
+                <div className="flex flex-col">
+                    <h2 className="font-bold">Adults</h2>
+                    <h2 className="text-sm font-medium text-gray-500">Ages 13 or above</h2>
+                </div>
+                <div className="flex gap-2 items-center justify-between">
+                    <h2 className="text-3xl"><CiCircleMinus/></h2>
+                    <h2 className="">0</h2>
+                    <h2 className="text-3xl"><CiCirclePlus/></h2>
+                </div>
+            </div>
+            <div className="flex w-80 py-4 mx-2 border-b justify-between">
+                <div className="flex flex-col">
+                    <h2 className="font-bold">Children</h2>
+                    <h2 className="text-sm font-medium text-gray-500">Ages 2 – 12</h2>
+                </div>
+                <div className="flex gap-2 items-center justify-between">
+                    <h2 className="text-3xl"><CiCircleMinus/></h2>
+                    <h2 className="">0</h2>
+                    <h2 className="text-3xl"><CiCirclePlus/></h2>
+                </div>
+            </div>
+            <div className="flex w-80 py-4 mx-2 border-b justify-between">
+                <div className="flex flex-col">
+                    <h2 className="font-bold">Infants</h2>
+                    <h2 className="text-sm font-medium text-gray-500">Under 2</h2>
+                </div>
+                <div className="flex gap-2 items-center justify-between">
+                    <h2 className="text-3xl"><CiCircleMinus/></h2>
+                    <h2 className="">0</h2>
+                    <h2 className="text-3xl"><CiCirclePlus/></h2>
+                </div>
+            </div>
+            <div className="flex w-80 py-4 mx-2 border-b justify-between">
+                <div className="flex flex-col">
+                    <h2 className="font-bold">Pets</h2>
+                    <h2 className="text-sm font-medium text-gray-500 underline">Bringing a service animal?</h2>
+                </div>
+                <div className="flex gap-2 items-center justify-between">
+                    <h2 className="text-3xl"><CiCircleMinus/></h2>
+                    <h2 className="">0</h2>
+                    <h2 className="text-3xl"><CiCirclePlus/></h2>
+                </div>
+            </div>
+          </div>
         </form>
       </div>
     </div>
