@@ -8,21 +8,57 @@ import { RxCross1 } from "react-icons/rx";
 import Image from "next/image";
 import Calender from "./Calender";
 
+import { addDays } from "date-fns";
+import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css"; // main css file
+import "react-date-range/dist/theme/default.css"; // theme css file
+
 const Navbar = () => {
+    const [startTimes,setStartTimes]=useState('')
+    const [endTimes,setEndTimes]=useState('')
+  const [state, setState] = useState([
+    {
+      startDate: new Date(),
+      endDate: addDays(new Date(), 7),
+      key: "selection",
+    },
+]);
+  console.log(state)
+  const startTime = state[0].startDate.toLocaleDateString('en-CA', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  })
+  const endTime = state[0].endDate.toLocaleDateString('en-CA', {
+    year: 'numeric',
+    month: 'numeric',
+    day: 'numeric'
+  })
+  //console.log(startTime,endTime)
   const [place, setPlace] = useState("");
   const [placeButton, setPlaceButton] = useState(false);
   const [isLocationVisible, setIsLocationVisible] = useState(false);
+  const [isCalenderVisible, setIsCalenderVisible] = useState(false);
   const locationDivRef = useRef(null);
+  const calenderDivRef = useRef(null);
+  const handleCalender = () => {
+    setIsLocationVisible(false);
+    setIsCalenderVisible(!isCalenderVisible);
+    setEndTimes(endTime)
+    setStartTimes(startTime)
+  };
+  //handle location div show and not shown
   const handleLocationDiv = () => {
     // console.log(isLocationVisible);
+    setIsCalenderVisible(false);
     setIsLocationVisible(!isLocationVisible);
   };
-  const handleClickOutside = (event) => {
-    if (
-      locationDivRef.current &&
-      !locationDivRef.current.contains(event.target)
-    ) {
+  const handleClickOutside = (e) => {
+    if (locationDivRef.current && !locationDivRef.current.contains(e.target)) {
       setIsLocationVisible(false);
+    }
+    if (calenderDivRef.current && !calenderDivRef.current.contains(e.target)) {
+      setIsCalenderVisible(false);
     }
   };
   useEffect(() => {
@@ -65,12 +101,20 @@ const Navbar = () => {
         </div>
       </div>
       {/* search section */}
-      <div className={`${isLocationVisible ? "bg-gray-300":""} border relative shadow-md grid grid-cols-10 max-w-[800px] mx-auto rounded-r-full rounded-l-full`}>
-        <form>
-          <div className=" group">
+      <div
+        className={`${
+          isLocationVisible ? "bg-gray-300" : ""
+        } border relative shadow-md  max-w-[800px] mx-auto rounded-r-full rounded-l-full`}
+      >
+        <form className="grid grid-cols-10">
+          <div className="col-span-3 group ">
             <div
               onClick={handleLocationDiv}
-              className={`${isLocationVisible ? "bg-white rounded-r-full group-hover:bg-white":""} col-span-4 px-7 py-4 hover:my-0 flex flex-col w-56 relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full border-r`}
+              className={`${
+                isLocationVisible
+                  ? "bg-white rounded-r-full group-hover:bg-white "
+                  : ""
+              } px-7  py-4 hover:my-0 flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full`}
             >
               <label className="text-sm font-bold">Where</label>
               <input
@@ -78,7 +122,9 @@ const Navbar = () => {
                 onChange={handlePlace}
                 name="place"
                 defaultValue={place}
-                className={`${isLocationVisible ?"group-hover:bg-white":""} focus:outline-none text-sm group-hover:bg-slate-300`}
+                className={`${
+                  isLocationVisible ? "group-hover:bg-white" : ""
+                } focus:outline-none text-sm group-hover:bg-slate-300`}
                 placeholder="Search destinations"
               />
               {placeButton ? (
@@ -92,37 +138,65 @@ const Navbar = () => {
                 <></>
               )}
             </div>
-           
           </div>
           {isLocationVisible && (
-              <div
-                ref={locationDivRef}
-                className="max-w-[400px] bg-white shadow-md px-6 py-4 rounded-3xl mt-2 absolute"
-              >
-                <div className="grid grid-cols-3 gap-1">
-                  {worldLocations?.map((map) => (
-                    <div
-                      onClick={() => setPlace(map.inputValue)}
-                      className="hover:bg-slate-300 p-2 rounded-xl"
-                      key={map.location}
-                    >
-                      <Image
-                        src={map.src}
-                        height={600}
-                        width={600}
-                        alt="world pic"
-                        className="rounded-xl border"
-                      />
-                      <h2 className="text-sm">{map.location}</h2>
-                    </div>
-                  ))}
-                </div>
+            <div
+              ref={locationDivRef}
+              className="max-w-[400px] bg-white shadow-md px-6 py-4 rounded-3xl mt-20 absolute"
+            >
+              <div className="grid grid-cols-3 gap-1">
+                {worldLocations?.map((map) => (
+                  <div
+                    onClick={() => setPlace(map.inputValue)}
+                    className="hover:bg-slate-300 p-2 rounded-xl"
+                    key={map.location}
+                  >
+                    <Image
+                      src={map.src}
+                      height={600}
+                      width={600}
+                      alt="world pic"
+                      className="rounded-xl border"
+                    />
+                    <h2 className="text-sm">{map.location}</h2>
+                  </div>
+                ))}
               </div>
-            )}
+            </div>
+          )}
           {/* check in and checkout section */}
-          <div className="absolute max-w-[800px] round mt-4">
-            <Calender className="rounded-3xl"/>
+          <div onClick={handleCalender} className="group col-span-2 ">
+            <div className=" py-4  hover:my-0 px-7 flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full">
+              <h2 className="text-sm font-bold">Check in</h2>
+              <h2 className="text-sm font-bold text-gray-500">{state && startTimes.length>0 ? startTime : "Add date"}</h2>
+            </div>
           </div>
+          <div onClick={handleCalender} className="group col-span-2 ">
+            <div className=" py-4  hover:my-0 px-7 flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full">
+              <h2 className="text-sm font-bold">Check out</h2>
+              <h2 className="text-sm font-bold text-gray-500">{state && endTimes.length>0 ? endTime : "Add date"}</h2>
+            </div>
+          </div>
+          <div className="col-span-3"></div>
+          {isCalenderVisible && (
+            <div
+              ref={calenderDivRef}
+              className="absolute max-w-[800px] mt-20 round"
+            >
+              <DateRangePicker
+                onChange={(item) => setState([item.selection])}
+                showSelectionPreview={true}
+                moveRangeOnFirstSelection={false}
+                months={2}
+                ranges={state}
+                direction="horizontal"
+                staticRanges={[]}
+                inputRanges={[]}
+                minDate={new Date()}
+                rangeColors={["#262626"]}
+              />
+            </div>
+          )}
         </form>
       </div>
     </div>
