@@ -5,6 +5,8 @@ import { TfiWorld } from "react-icons/tfi";
 import { RxHamburgerMenu } from "react-icons/rx";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
+import Image from "next/image";
+
 const Navbar = () => {
   const [place, setPlace] = useState("");
   const [placeButton, setPlaceButton] = useState(false);
@@ -62,24 +64,25 @@ const Navbar = () => {
         </div>
       </div>
       {/* search section */}
-      <div className="border shadow-md grid grid-cols-10 max-w-[800px] mx-auto rounded-r-full rounded-l-full">
+      <div className={`${isLocationVisible ? "bg-gray-300":""} border relative shadow-md grid grid-cols-10 max-w-[800px] mx-auto rounded-r-full rounded-l-full`}>
         <form>
-          <div className="border-r w-56 hover:border-r-0 group relative">
+          <div className=" group">
             <div
               onClick={handleLocationDiv}
-              className="col-span-4 px-7 py-4 flex flex-col w-56 relative group-hover:bg-slate-300 rounded-r-full rounded-l-full "
+              className={`${isLocationVisible ? "bg-white py-4 my-0 rounded-r-full group-hover:bg-white":""} col-span-4 px-7 my-4 hover:my-0 hover:py-4 flex flex-col w-56 relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full border-r`}
             >
               <label className="text-sm font-bold">Where</label>
               <input
                 type="text"
                 onChange={handlePlace}
                 name="place"
-                className="focus:outline-none text-sm group-hover:bg-slate-300"
+                defaultValue={place}
+                className={`${isLocationVisible ?"group-hover:bg-white":""} focus:outline-none text-sm group-hover:bg-slate-300`}
                 placeholder="Search destinations"
               />
               {placeButton ? (
                 <button
-                  className="absolute right-2 top-3"
+                  className="absolute right-2 top-7 text-sm"
                   onClick={handlePlaceButton}
                 >
                   <RxCross1 />
@@ -88,12 +91,34 @@ const Navbar = () => {
                 <></>
               )}
             </div>
-            {isLocationVisible && (
-              <div ref={locationDivRef} className="max-w-md bg-white shadow-md px-6 py-4 rounded-2xl mt-2 absolute">
-                Click outside of me to hide!
+           
+          </div>
+          {isLocationVisible && (
+              <div
+                ref={locationDivRef}
+                className="max-w-[400px] bg-white shadow-md px-6 py-4 rounded-3xl mt-2 absolute"
+              >
+                <div className="grid grid-cols-3 gap-1">
+                  {worldLocations?.map((map) => (
+                    <div
+                      onClick={() => setPlace(map.inputValue)}
+                      className="hover:bg-slate-300 p-2 rounded-xl"
+                      key={map.location}
+                    >
+                      <Image
+                        src={map.src}
+                        height={600}
+                        width={600}
+                        alt="world pic"
+                        className="rounded-xl border"
+                      />
+                      <h2 className="text-sm">{map.location}</h2>
+                    </div>
+                  ))}
+                </div>
               </div>
             )}
-          </div>
+          {/* check in and checkout section */}
         </form>
       </div>
     </div>
@@ -101,3 +126,36 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+const worldLocations = [
+  {
+    src: "/1.jpg",
+    location: "I'm flexible",
+    inputValue: "",
+  },
+  {
+    src: "/2.jpg",
+    location: "SouthEast Asia",
+    inputValue: "SouthEast Asia",
+  },
+  {
+    src: "/3.jpg",
+    location: "Canada",
+    inputValue: "canada",
+  },
+  {
+    src: "/4.jpg",
+    location: "Europe",
+    inputValue: "Europe",
+  },
+  {
+    src: "/5.jpg",
+    location: "Malaysia",
+    inputValue: "Malaysia",
+  },
+  {
+    src: "/6.jpg",
+    location: "United States",
+    inputValue: "United States",
+  },
+];
