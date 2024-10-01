@@ -2,6 +2,13 @@ import localFont from "next/font/local";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import {Manrope} from 'next/font/google'
+
+
+const manrope = Manrope({
+  subsets: ['latin'], // Ensure the correct character subsets are used
+  weight: ['400', '500', '700'], // Choose the font weights you need
+});
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -23,9 +30,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={manrope.className}
       >
-        <div className="max-w-[1740px]">
+        <div className="max-w-[1780px] mx-auto">
           <Navbar/>
            {children}
         </div>
