@@ -25,3 +25,15 @@ body {
     text-wrap: balance;
   }
 }
+
+.rdrDefinedRangesWrapper {
+  display: none;
+}
+
+.rdrMonth {
+  width: 400px;
+}
+
+.rdrCalenderWraper {
+  width: 100%;
+}

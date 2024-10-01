@@ -6,6 +6,7 @@ import { RxHamburgerMenu } from "react-icons/rx";
 import { IoPersonCircleSharp } from "react-icons/io5";
 import { RxCross1 } from "react-icons/rx";
 import Image from "next/image";
+import Calender from "./Calender";
 
 const Navbar = () => {
   const [place, setPlace] = useState("");
@@ -69,7 +70,7 @@ const Navbar = () => {
           <div className=" group">
             <div
               onClick={handleLocationDiv}
-              className={`${isLocationVisible ? "bg-white py-4 my-0 rounded-r-full group-hover:bg-white":""} col-span-4 px-7 my-4 hover:my-0 hover:py-4 flex flex-col w-56 relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full border-r`}
+              className={`${isLocationVisible ? "bg-white rounded-r-full group-hover:bg-white":""} col-span-4 px-7 py-4 hover:my-0 flex flex-col w-56 relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full border-r`}
             >
               <label className="text-sm font-bold">Where</label>
               <input
@@ -119,6 +120,9 @@ const Navbar = () => {
               </div>
             )}
           {/* check in and checkout section */}
+          <div className="absolute max-w-[800px] round mt-4">
+            <Calender className="rounded-3xl"/>
+          </div>
         </form>
       </div>
     </div>
