@@ -41,6 +41,83 @@ const Navbar = () => {
   const [isCalenderVisible, setIsCalenderVisible] = useState(false);
   const locationDivRef = useRef(null);
   const calenderDivRef = useRef(null);
+  const [adult,setAdult]=useState(0)
+  const [children,setChildren]=useState(0)
+  const [infant,setInfant]=useState(0)
+  const [pet,setPet]=useState(0)
+  const [totalGuest,setTotalGuest]=useState(0)
+  const handleCount =(arg)=>{
+    if(arg==="adultDec"){
+        const newCount =adult-1
+        if(adult<1){
+            return
+        }
+        const newTotal =totalGuest-1
+        if(totalGuest<1){
+            return
+        }
+        setTotalGuest(newTotal)
+        setAdult(newCount)
+    }
+    if(arg==="adultInc"){
+        const newCount =adult+1
+        const newTotal =totalGuest+1
+        setTotalGuest(newTotal)
+        setAdult(newCount)
+    }
+    //children
+    if(arg==="childrenDec"){
+        const newCount =children-1
+        if(children<1){
+            return
+        }
+        const newTotal =totalGuest-1
+        if(totalGuest<1){
+            return
+        }
+        setTotalGuest(newTotal)
+        setChildren(newCount)
+    }
+    if(arg==="childrenInc"){
+        const newCount =children+1
+        const newTotal =totalGuest+1
+        setTotalGuest(newTotal)
+        setChildren(newCount)
+    }
+    //infant
+    if(arg==="infantDec"){
+        const newCount =infant-1
+        if(infant<1){
+            return
+        }
+        const newTotal =totalGuest-1
+        if(totalGuest<1){
+            return
+        }
+        setTotalGuest(newTotal)
+        
+        setInfant(newCount)
+    }
+    if(arg==="infantInc"){
+        const newCount =infant+1
+        const newTotal =totalGuest+1
+        setTotalGuest(newTotal)
+        setInfant(newCount)
+    }
+    //pet
+    if(arg==="petDec"){
+        const newCount =pet-1
+        if(pet<1){
+            return
+        }
+        setPet(newCount)
+    }
+    if(arg==="petInc"){
+        const newCount =pet+1
+        setPet(newCount)
+    }
+  }
+//   console.log(totalGuest)
   const handleCalender = () => {
     setIsLocationVisible(false);
     setIsCalenderVisible(!isCalenderVisible);
@@ -233,9 +310,9 @@ const Navbar = () => {
                     <h2 className="text-sm font-medium text-gray-500">Ages 13 or above</h2>
                 </div>
                 <div className="flex gap-2 items-center justify-between">
-                    <h2 className="text-3xl"><CiCircleMinus/></h2>
-                    <h2 className="">0</h2>
-                    <h2 className="text-3xl"><CiCirclePlus/></h2>
+                    <h2 onClick={()=>handleCount('adultDec')} className="text-3xl"><CiCircleMinus/></h2>
+                    <h2 className="">{adult}</h2>
+                    <h2 onClick={()=>handleCount('adultInc')} className="text-3xl"><CiCirclePlus/></h2>
                 </div>
             </div>
             <div className="flex w-80 py-4 mx-2 border-b justify-between">
@@ -244,9 +321,9 @@ const Navbar = () => {
                     <h2 className="text-sm font-medium text-gray-500">Ages 2 – 12</h2>
                 </div>
                 <div className="flex gap-2 items-center justify-between">
-                    <h2 className="text-3xl"><CiCircleMinus/></h2>
-                    <h2 className="">0</h2>
-                    <h2 className="text-3xl"><CiCirclePlus/></h2>
+                    <h2 onClick={()=>handleCount('childrenDec')} className="text-3xl"><CiCircleMinus/></h2>
+                    <h2 className="">{children}</h2>
+                    <h2 onClick={()=>handleCount('childrenInc')} className="text-3xl"><CiCirclePlus/></h2>
                 </div>
             </div>
             <div className="flex w-80 py-4 mx-2 border-b justify-between">
@@ -255,20 +332,20 @@ const Navbar = () => {
                     <h2 className="text-sm font-medium text-gray-500">Under 2</h2>
                 </div>
                 <div className="flex gap-2 items-center justify-between">
-                    <h2 className="text-3xl"><CiCircleMinus/></h2>
-                    <h2 className="">0</h2>
-                    <h2 className="text-3xl"><CiCirclePlus/></h2>
+                    <h2 onClick={()=>handleCount('infantDec')} className="text-3xl"><CiCircleMinus/></h2>
+                    <h2 className="">{infant}</h2>
+                    <h2 onClick={()=>handleCount('infantInc')} className="text-3xl"><CiCirclePlus/></h2>
                 </div>
             </div>
-            <div className="flex w-80 py-4 mx-2 border-b justify-between">
+            <div className="flex w-80 py-4 mx-2 justify-between">
                 <div className="flex flex-col">
                     <h2 className="font-bold">Pets</h2>
                     <h2 className="text-sm font-medium text-gray-500 underline">Bringing a service animal?</h2>
                 </div>
                 <div className="flex gap-2 items-center justify-between">
-                    <h2 className="text-3xl"><CiCircleMinus/></h2>
-                    <h2 className="">0</h2>
-                    <h2 className="text-3xl"><CiCirclePlus/></h2>
+                    <h2 onClick={()=>handleCount('petDec')} className="text-3xl"><CiCircleMinus/></h2>
+                    <h2 className="">{pet}</h2>
+                    <h2 onClick={()=>handleCount('petInc')} className="text-3xl"><CiCirclePlus/></h2>
                 </div>
             </div>
           </div>
