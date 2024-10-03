@@ -32,7 +32,7 @@ export default function RootLayout({ children }) {
       <body
         className={manrope.className}
       >
-        <div className="max-w-[1780px] mx-auto">
+        <div className="max-w-[1780px] mx-auto min-h-[10000px]">
           <Navbar/>
            {children}
         </div>
