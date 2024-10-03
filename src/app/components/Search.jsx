@@ -13,6 +13,11 @@ import Filter from "./Filter";
 const Search = () => {
   const [startTimes, setStartTimes] = useState("");
   const [endTimes, setEndTimes] = useState("");
+  const [minValue, setMinValue] = useState(100); 
+  const [maxValue, setMaxValue] = useState(900); 
+    const [bedrooms,setBedrooms] =useState(0)
+    const [beds,setBeds] =useState(0)
+    const [baths,setBaths] =useState(0)
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -32,6 +37,7 @@ const Search = () => {
     day: "numeric",
   });
   //console.log(startTime,endTime)
+  const [placeType,setPlaceType]=useState('')
   const [place, setPlace] = useState("");
   const [placeButton, setPlaceButton] = useState(false);
   const [isLocationVisible, setIsLocationVisible] = useState(false);
@@ -189,7 +195,7 @@ const Search = () => {
   const needed ={
     showFilter,
     filterFunction,
-    tax,setTax
+    tax,setTax,minValue,setMinValue,maxValue,setMaxValue,placeType,setPlaceType,bedrooms,setBedrooms,beds,setBeds,baths,setBaths
   }
   return (
     <div className="fixed top-20 min-w-[1780px]">
