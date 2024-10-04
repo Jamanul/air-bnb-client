@@ -76,38 +76,32 @@ const Filter = ({ needed }) => {
     setMaxValue,
     placeType,
     setPlaceType,
-    bedrooms,
-    setBedrooms,
+    bedroomsCount,
+    setBedroomsCount,
     beds,
     setBeds,
-    baths,
-    setBaths,
-    setWifi,
-    setAirConditioning,
-    setKitchen,
-    setSelfChecking,
-    setAllowsPet,
-    setGuestFavorite,
+    bathCount,
+    setBathCount,
     wifi,
     airConditioning,
     kitchen,
     selfChecking,
     allowsPet,
-    guestFavorite,instantBooking,setInstantBooking,handlePropertyType,propertyType,handlePet,handleWifi,handleAirConditioning,handleKitchen
+    guestFavourite,instantBooking,setInstantBooking,handlePropertyType,propertyType,handlePet,handleWifi,handleAirConditioning,handleKitchen,handleInstantBooking, handleSelfChecking,handleGuestFavourite
 
   } = needed;
 
   const handleBedAndRooms = (params) => {
     if (params === "bedroomsDec") {
-      const newCount = bedrooms - 1;
-      if (bedrooms < 1) {
+      const newCount = bedroomsCount - 1;
+      if (bedroomsCount < 1) {
         return;
       }
-      setBedrooms(newCount);
+      setBedroomsCount(newCount);
     }
     if (params === "bedroomsInc") {
-      const newCount = bedrooms + 1;
-      setBedrooms(newCount);
+      const newCount = bedroomsCount + 1;
+      setBedroomsCount(newCount);
     }
     if (params === "bedsDec") {
       const newCount = beds - 1;
@@ -121,18 +115,18 @@ const Filter = ({ needed }) => {
       setBeds(newCount);
     }
     if (params === "bathsDec") {
-      const newCount = baths - 1;
-      if (baths < 1) {
+      const newCount = bathCount - 1;
+      if (bathCount < 1) {
         return;
       }
-      setBaths(newCount);
+      setBathCount(newCount);
     }
     if (params === "bathsInc") {
-      const newCount = baths + 1;
-      setBaths(newCount);
+      const newCount = bathCount + 1;
+      setBathCount(newCount);
     }
   };
-
+  console.log(bedroomsCount)
   const handleMinChange = (e) => {
     const value = Math.min(Number(e.target.value), maxValue - 1);
     setMinValue(value);
@@ -326,7 +320,7 @@ const Filter = ({ needed }) => {
                             <CiCircleMinus />
                           </h2>
                           <h2 className="text-center">
-                            {bedrooms > 0 ? bedrooms : "Any"}
+                            {bedroomsCount > 0 ? bedroomsCount : "Any"}
                           </h2>
                           <h2
                             className="text-3xl"
@@ -366,7 +360,7 @@ const Filter = ({ needed }) => {
                             <CiCircleMinus />
                           </h2>
                           <h2 className="text-center">
-                            {baths > 0 ? baths : "Any"}
+                            {bathCount > 0 ? bathCount : "Any"}
                           </h2>
                           <h2
                             className="text-3xl"
@@ -401,10 +395,10 @@ const Filter = ({ needed }) => {
                         Booking options
                       </h2>
                       <div className="flex pb-8 gap-1">
-                        <h2  onClick={() => setInstantBooking(!instantBooking)} className={`${instantBooking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2  onClick={() => handleInstantBooking()} className={`${instantBooking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <IoThunderstorm /> Instant book
                         </h2>
-                        <h2 onClick={() => setSelfChecking(!selfChecking)} className={`${selfChecking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2 onClick={() =>  handleSelfChecking()} className={`${selfChecking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiKey /> Self Checking
                         </h2>
                         <h2 onClick={ handlePet} className={`${allowsPet? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
@@ -415,7 +409,7 @@ const Filter = ({ needed }) => {
                     {/*Guest */}
                     <div className="w-56">
                       <h2 className="py-6  font-bold ">Standout Stays</h2>
-                      <div onClick={()=>setGuestFavorite(!guestFavorite)} className={`${guestFavorite? "bg-gray-100 border border-black": ""} flex items-center gap-4 border px-2 py-4 rounded-lg `}>
+                      <div onClick={()=>handleGuestFavourite()} className={`${guestFavourite? "bg-gray-100 border border-black": ""} flex items-center gap-4 border px-2 py-4 rounded-lg `}>
                         <div className="text-3xl">
                           <GiAngelWings />
                         </div>

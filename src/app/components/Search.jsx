@@ -12,21 +12,21 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import Filter from "./Filter";
 import axios from "axios";
 const Search = () => {
-    const [category,setCategory]=useState('Icons')
+    const [category,setCategory]=useState('Rooms')
     const [wifi, setWifi] = useState(null);
     const [airConditioning, setAirConditioning] = useState(null);
     const [kitchen, setKitchen] = useState(null);
     const [selfChecking, setSelfChecking] = useState(null);
     const [instantBooking,setInstantBooking]=useState(null)
     const [allowsPet, setAllowsPet] = useState(null);
-    const [guestFavorite, setGuestFavorite] = useState(null);
+    const [guestFavourite, setGuestFavourite] = useState(null);
   const [startTimes, setStartTimes] = useState("");
   const [endTimes, setEndTimes] = useState("");
   const [minValue, setMinValue] = useState(100); 
   const [maxValue, setMaxValue] = useState(900); 
-    const [bedrooms,setBedrooms] =useState(0)
+    const [bedroomsCount,setBedroomsCount] =useState(0)
     const [beds,setBeds] =useState(0)
-    const [baths,setBaths] =useState(0)
+    const [bathCount,setBathCount] =useState(0)
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -231,30 +231,39 @@ const Search = () => {
   const handleKitchen =()=>{
     setKitchen(prevKitchen=>prevKitchen ===null ? true : null)
   }
+  const handleInstantBooking =()=>{
+    setInstantBooking(prev=>prev ===null?true:null)
+  }
+  const handleSelfChecking =()=>{
+    setSelfChecking(prev=>prev ===null?true:null)
+  }
+  const handleGuestFavourite =()=>{
+    setGuestFavourite(prev=>prev ===null?true:null)
+  }
   const needed ={
     showFilter,
     filterFunction,
-    tax,setTax,minValue,setMinValue,maxValue,setMaxValue,placeType,setPlaceType,bedrooms,setBedrooms,beds,setBeds,baths,setBaths,setWifi,wifi,instantBooking,setInstantBooking,
+    tax,setTax,minValue,setMinValue,maxValue,setMaxValue,placeType,setPlaceType,bedroomsCount,setBedroomsCount,beds,setBeds,bathCount,setBathCount,setWifi,wifi,instantBooking,setInstantBooking,
     airConditioning,
     kitchen,
     selfChecking,
     allowsPet,
-    guestFavorite,
+    guestFavourite,
     setAirConditioning,
     setAirConditioning,
     setKitchen,
     setSelfChecking,
     setAllowsPet,
-    setGuestFavorite,handlePropertyType,propertyType,handlePet,handleWifi,handleAirConditioning,handleKitchen
+    setGuestFavourite,handlePropertyType,propertyType,handlePet,handleWifi,handleAirConditioning,handleKitchen,handleInstantBooking, handleSelfChecking,handleGuestFavourite
   }
   
   useEffect(()=>{
     console.log('data is called')
     getData()
-  },[category,allowsPet,wifi,airConditioning,kitchen])
+  },[category,allowsPet,wifi,airConditioning,kitchen,instantBooking,selfChecking,guestFavourite,propertyType,bedroomsCount,beds,bathCount])
   console.log(category)
   const getData = async () =>{
-    const res =await axios.get('http://localhost:5000/allData',{params:{category,allowsPet,wifi,airConditioning,kitchen}})
+    const res =await axios.get('http://localhost:5000/allData',{params:{category,allowsPet,wifi,airConditioning,kitchen,instantBooking,selfChecking,guestFavourite,propertyType,bedroomsCount,beds,bathCount}})
     const data =await res.data
     console.log(data)
   }
