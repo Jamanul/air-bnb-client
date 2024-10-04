@@ -93,7 +93,7 @@ const Filter = ({ needed }) => {
     kitchen,
     selfChecking,
     allowsPet,
-    guestFavorite,instantBooking,setInstantBooking,handlePropertyType 
+    guestFavorite,instantBooking,setInstantBooking,handlePropertyType,propertyType
 
   } = needed;
 
@@ -383,14 +383,14 @@ const Filter = ({ needed }) => {
                       <div className="flex pb-6 gap-1">
                         <h2
                           onClick={() => setWifi(!wifi)}
-                          className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border"
+                          className={`${wifi? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
                         >
                           <FaWifi /> Wifi
                         </h2>
-                        <h2  onClick={() => setAirConditioning(!airConditioning)} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2  onClick={() => setAirConditioning(!airConditioning)} className={`${airConditioning? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiSnowflake1 /> Air Condition
                         </h2>
-                        <h2  onClick={() => setKitchen(!kitchen)} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2  onClick={() => setKitchen(!kitchen)} className={`${kitchen? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiForkKnifeSpoon /> Kitchen
                         </h2>
                       </div>
@@ -401,13 +401,13 @@ const Filter = ({ needed }) => {
                         Booking options
                       </h2>
                       <div className="flex pb-8 gap-1">
-                        <h2  onClick={() => setInstantBooking(!instantBooking)} className="flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2  onClick={() => setInstantBooking(!instantBooking)} className={`${instantBooking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <IoThunderstorm /> Instant book
                         </h2>
-                        <h2 onClick={() => setSelfChecking(!selfChecking)} className="flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2 onClick={() => setSelfChecking(!selfChecking)} className={`${selfChecking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiKey /> Self Checking
                         </h2>
-                        <h2 onClick={() => setAllowsPet(!allowsPet)} className="flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2 onClick={() => setAllowsPet(!allowsPet)} className={`${allowsPet? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiCat /> Allows Pets
                         </h2>
                       </div>
@@ -415,7 +415,7 @@ const Filter = ({ needed }) => {
                     {/*Guest */}
                     <div className="w-56">
                       <h2 className="py-6  font-bold ">Standout Stays</h2>
-                      <div onClick={()=>setGuestFavorite(!guestFavorite)} className="flex items-center gap-4 border px-2 py-4 rounded-lg ">
+                      <div onClick={()=>setGuestFavorite(!guestFavorite)} className={`${guestFavorite? "bg-gray-100 border border-black": ""} flex items-center gap-4 border px-2 py-4 rounded-lg `}>
                         <div className="text-3xl">
                           <GiAngelWings />
                         </div>
@@ -433,16 +433,16 @@ const Filter = ({ needed }) => {
                         Property Type
                       </h2>
                       <div className="grid-cols-3 grid pb-8 gap-1">
-                        <h2 onClick={()=>{handlePropertyType('house')}} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2 onClick={()=>{handlePropertyType('house')}} className={`${propertyType ==='House'? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiHouse /> House
                         </h2>
-                        <h2 onClick={()=>{handlePropertyType('hotel')}} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2 onClick={()=>{handlePropertyType('hotel')}} className={`${propertyType ==='Hotel'? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <MdHotel /> Hotel
                         </h2>
-                        <h2 onClick={()=>{handlePropertyType('apartment')}} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2 onClick={()=>{handlePropertyType('apartment')}} className={`${propertyType ==='Apartment'? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <MdApartment /> Apartment
                         </h2>
-                        <h2 onClick={()=>{handlePropertyType('guestHouse')}} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                        <h2 onClick={()=>{handlePropertyType('guestHouse')}} className={`${propertyType ==='Guesthouse'? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <MdHouse /> Guesthouse
                         </h2>
                       </div>
@@ -475,48 +475,48 @@ const Filter = ({ needed }) => {
 export default Filter;
 
 const icons1 = [
-  { name: "icons", element: <BsFillTicketPerforatedFill /> },
-  { name: "rooms", element: <MdOutlineBedroomParent /> },
-  { name: "countryside", element: <PiIslandBold /> },
-  { name: "omg", element: <TbBeach /> },
-  { name: "lakefront", element: <GiBoatFishing /> },
-  { name: "windmills", element: <GiWindmill /> },
-  { name: "amazing views", element: <MdLandslide></MdLandslide> },
-  { name: "bed& breakfast", element: <GiBedLamp /> },
-  { name: "top of the world new", element: <GiMountaintop /> },
-  { name: "tiny homes", element: <GiHomeGarage /> },
-  { name: "camping", element: <GiCampfire /> },
-  { name: "amazing pools", element: <GiPoolDive /> },
-  { name: "houseboats", element: <IoBoatSharp /> },
-  { name: "cabins", element: <GiWoodCabin /> },
-  { name: "national parks", element: <GiParkBench /> },
-  { name: "caves", element: <GiCaveEntrance /> },
-  { name: "hanoks", element: <HiHomeModern /> },
-  { name: "skiing", element: <GiSkiBoot /> },
-  { name: "beach", element: <GiWaves /> },
-  { name: "desert", element: <GiDesert /> },
-  { name: "ski", element: <GiSkier /> },
+  { name: "Icons", element: <BsFillTicketPerforatedFill /> },
+  { name: "Rooms", element: <MdOutlineBedroomParent /> },
+  { name: "Countryside", element: <PiIslandBold /> },
+  { name: "OMG", element: <TbBeach /> },
+  { name: "Lakefront", element: <GiBoatFishing /> },
+  { name: "Windmills", element: <GiWindmill /> },
+  { name: "Amazing Views", element: <MdLandslide></MdLandslide> },
+  { name: "Bed & Breakfast", element: <GiBedLamp /> },
+  { name: "Top of the world new", element: <GiMountaintop /> },
+  { name: "Tiny homes", element: <GiHomeGarage /> },
+  { name: "Camping", element: <GiCampfire /> },
+  { name: "Amazing pools", element: <GiPoolDive /> },
+  { name: "Houseboats", element: <IoBoatSharp /> },
+  { name: "Cabins", element: <GiWoodCabin /> },
+  { name: "National parks", element: <GiParkBench /> },
+  { name: "Caves", element: <GiCaveEntrance /> },
+  { name: "Hanoks", element: <HiHomeModern /> },
+  { name: "Skiing", element: <GiSkiBoot /> },
+  { name: "Beach", element: <GiWaves /> },
+  { name: "Desert", element: <GiDesert /> },
+  { name: "Ski", element: <GiSkier /> },
 ];
 
 const icons2 = [
-  { name: "luxe", element: <GiFlake /> },
-  { name: "lake", element: <GiFishingBoat /> },
-  { name: "tropical", element: <GiSun /> },
-  { name: "castles", element: <GiCastle /> },
-  { name: "off the grid", element: <GiSeaCliff /> },
-  { name: "design", element: <GiHoneycomb /> },
-  { name: "barns", element: <GiBarn /> },
-  { name: "top cities", element: <GiModernCity /> },
-  { name: "golfing", element: <GiGolfFlag /> },
-  { name: "trulli", element: <GiHills /> },
-  { name: "mantions", element: <GiHillFort /> },
-  { name: "trending", element: <MdTrendingUp /> },
-  { name: "tree houses", element: <GiTreehouse /> },
-  { name: "farms", element: <GiFarmTractor /> },
-  { name: "campers", element: <GiCampfire /> },
-  { name: "surfing", element: <GiSurfBoard /> },
-  { name: "earth homes", element: <GiBarn /> },
-  { name: "a-framers", element: <GiFarmer /> },
-  { name: "historical homes", element: <GiCastleRuins /> },
-  { name: "vineyard", element: <GiVineFlower /> },
+  { name: "Luxe", element: <GiFlake /> },
+  { name: "Lake", element: <GiFishingBoat /> },
+  { name: "Tropical", element: <GiSun /> },
+  { name: "Castles", element: <GiCastle /> },
+  { name: "Off the grid", element: <GiSeaCliff /> },
+  { name: "Design", element: <GiHoneycomb /> },
+  { name: "Barns", element: <GiBarn /> },
+  { name: "Top cities", element: <GiModernCity /> },
+  { name: "Golfing", element: <GiGolfFlag /> },
+  { name: "Trulli", element: <GiHills /> },
+  { name: "Mantions", element: <GiHillFort /> },
+  { name: "Trending", element: <MdTrendingUp /> },
+  { name: "Tree houses", element: <GiTreehouse /> },
+  { name: "Farms", element: <GiFarmTractor /> },
+  { name: "Campers", element: <GiCampfire /> },
+  { name: "Surfing", element: <GiSurfBoard /> },
+  { name: "Earth homes", element: <GiBarn /> },
+  { name: "A-framers", element: <GiFarmer /> },
+  { name: "Historical homes", element: <GiCastleRuins /> },
+  { name: "Vineyard", element: <GiVineFlower /> },
 ];

@@ -10,7 +10,9 @@ import { DateRangePicker } from "react-date-range";
 import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import Filter from "./Filter";
+import axios from "axios";
 const Search = () => {
+    const [categoryName,setCategoryName]=useState('Icons')
     const [wifi, setWifi] = useState(false);
     const [airConditioning, setAirConditioning] = useState(false);
     const [kitchen, setKitchen] = useState(false);
@@ -72,8 +74,8 @@ const Search = () => {
         if(params==="guestHouse"){
             setPropertyType("Guesthouse")
         }
-        if(params==="apartment"){
-            setPropertyType("Apartment")
+        if(params==="hotel"){
+            setPropertyType("Hotel")
         }
   }
   const handleCount = (arg) => {
@@ -206,12 +208,14 @@ const Search = () => {
     setPlace("");
   };
   const filterFunction =(category)=>{
-    console.log(category)
+    //console.log(category)
     if(category == 'icons'){
         setShowFilter(false)
+        setCategoryName('icons')
     }
     else{
         setShowFilter(true)
+        setCategoryName(category)
     }
   }
   const needed ={
@@ -229,7 +233,17 @@ const Search = () => {
     setKitchen,
     setSelfChecking,
     setAllowsPet,
-    setGuestFavorite,handlePropertyType 
+    setGuestFavorite,handlePropertyType,propertyType
+  }
+
+  useEffect(()=>{
+    getData()
+  },[categoryName])
+  console.log(categoryName)
+  const getData = async () =>{
+    const res =await axios.get('http://localhost:5000/allData',{params:{categoryName}})
+    const data =await res.data
+    console.log(data)
   }
   return (
     <div className="fixed top-20 min-w-[1780px]">
