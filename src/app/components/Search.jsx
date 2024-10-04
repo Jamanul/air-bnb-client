@@ -12,14 +12,14 @@ import "react-date-range/dist/theme/default.css"; // theme css file
 import Filter from "./Filter";
 import axios from "axios";
 const Search = () => {
-    const [categoryName,setCategoryName]=useState('Icons')
-    const [wifi, setWifi] = useState(false);
-    const [airConditioning, setAirConditioning] = useState(false);
-    const [kitchen, setKitchen] = useState(false);
-    const [selfChecking, setSelfChecking] = useState(false);
-    const [instantBooking,setInstantBooking]=useState(false)
-    const [allowsPet, setAllowsPet] = useState(false);
-    const [guestFavorite, setGuestFavorite] = useState(false);
+    const [category,setCategory]=useState('Icons')
+    const [wifi, setWifi] = useState(null);
+    const [airConditioning, setAirConditioning] = useState(null);
+    const [kitchen, setKitchen] = useState(null);
+    const [selfChecking, setSelfChecking] = useState(null);
+    const [instantBooking,setInstantBooking]=useState(null)
+    const [allowsPet, setAllowsPet] = useState(null);
+    const [guestFavorite, setGuestFavorite] = useState(null);
   const [startTimes, setStartTimes] = useState("");
   const [endTimes, setEndTimes] = useState("");
   const [minValue, setMinValue] = useState(100); 
@@ -211,12 +211,25 @@ const Search = () => {
     //console.log(category)
     if(category == 'icons'){
         setShowFilter(false)
-        setCategoryName('icons')
+        setCategory('icons')
     }
     else{
         setShowFilter(true)
-        setCategoryName(category)
+        setCategory(category)
     }
+  }
+  const handlePet=()=>{
+   //console.log(allowsPet)
+   setAllowsPet(prevAllowsPet => prevAllowsPet === null ? true : null); 
+  }
+  const handleWifi =()=>{
+    setWifi(prevWifi => prevWifi === null ? true :null)
+  }
+  const handleAirConditioning=()=>{
+    setAirConditioning(prevAirConditioning => prevAirConditioning === null ? true :null)
+  }
+  const handleKitchen =()=>{
+    setKitchen(prevKitchen=>prevKitchen ===null ? true : null)
   }
   const needed ={
     showFilter,
@@ -227,21 +240,21 @@ const Search = () => {
     selfChecking,
     allowsPet,
     guestFavorite,
-    
-        setAirConditioning,
+    setAirConditioning,
     setAirConditioning,
     setKitchen,
     setSelfChecking,
     setAllowsPet,
-    setGuestFavorite,handlePropertyType,propertyType
+    setGuestFavorite,handlePropertyType,propertyType,handlePet,handleWifi,handleAirConditioning,handleKitchen
   }
-
+  
   useEffect(()=>{
+    console.log('data is called')
     getData()
-  },[categoryName])
-  console.log(categoryName)
+  },[category,allowsPet,wifi,airConditioning,kitchen])
+  console.log(category)
   const getData = async () =>{
-    const res =await axios.get('http://localhost:5000/allData',{params:{categoryName}})
+    const res =await axios.get('http://localhost:5000/allData',{params:{category,allowsPet,wifi,airConditioning,kitchen}})
     const data =await res.data
     console.log(data)
   }

@@ -93,7 +93,7 @@ const Filter = ({ needed }) => {
     kitchen,
     selfChecking,
     allowsPet,
-    guestFavorite,instantBooking,setInstantBooking,handlePropertyType,propertyType
+    guestFavorite,instantBooking,setInstantBooking,handlePropertyType,propertyType,handlePet,handleWifi,handleAirConditioning,handleKitchen
 
   } = needed;
 
@@ -142,7 +142,7 @@ const Filter = ({ needed }) => {
     const value = Math.max(Number(e.target.value), minValue + 1);
     setMaxValue(value);
   };
-  console.log(tax);
+  //console.log(tax);
   return (
     <div>
       <div className="flex max-w-[1780px]">
@@ -382,15 +382,15 @@ const Filter = ({ needed }) => {
                       <h2 className="py-6 border-t font-bold ">Amenities</h2>
                       <div className="flex pb-6 gap-1">
                         <h2
-                          onClick={() => setWifi(!wifi)}
+                          onClick={() => handleWifi()}
                           className={`${wifi? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
                         >
                           <FaWifi /> Wifi
                         </h2>
-                        <h2  onClick={() => setAirConditioning(!airConditioning)} className={`${airConditioning? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2  onClick={() => handleAirConditioning()} className={`${airConditioning? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiSnowflake1 /> Air Condition
                         </h2>
-                        <h2  onClick={() => setKitchen(!kitchen)} className={`${kitchen? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2  onClick={() => handleKitchen()} className={`${kitchen? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiForkKnifeSpoon /> Kitchen
                         </h2>
                       </div>
@@ -407,7 +407,7 @@ const Filter = ({ needed }) => {
                         <h2 onClick={() => setSelfChecking(!selfChecking)} className={`${selfChecking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiKey /> Self Checking
                         </h2>
-                        <h2 onClick={() => setAllowsPet(!allowsPet)} className={`${allowsPet? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2 onClick={ handlePet} className={`${allowsPet? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
                           <GiCat /> Allows Pets
                         </h2>
                       </div>
