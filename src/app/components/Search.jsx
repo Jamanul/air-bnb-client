@@ -11,6 +11,13 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import Filter from "./Filter";
 const Search = () => {
+    const [wifi, setWifi] = useState(false);
+    const [airConditioning, setAirConditioning] = useState(false);
+    const [kitchen, setKitchen] = useState(false);
+    const [selfChecking, setSelfChecking] = useState(false);
+    const [instantBooking,setInstantBooking]=useState(false)
+    const [allowsPet, setAllowsPet] = useState(false);
+    const [guestFavorite, setGuestFavorite] = useState(false);
   const [startTimes, setStartTimes] = useState("");
   const [endTimes, setEndTimes] = useState("");
   const [minValue, setMinValue] = useState(100); 
@@ -38,6 +45,7 @@ const Search = () => {
   });
   //console.log(startTime,endTime)
   const [placeType,setPlaceType]=useState('')
+  const [propertyType,setPropertyType]=useState('')
   const [place, setPlace] = useState("");
   const [placeButton, setPlaceButton] = useState(false);
   const [isLocationVisible, setIsLocationVisible] = useState(false);
@@ -54,6 +62,20 @@ const Search = () => {
   const [navMoved, setNavMoved] = useState(false);
   const [showFilter,setShowFilter]=useState(false)
   const [tax,setTax]=useState(false)
+  const handlePropertyType =(params)=>{
+        if(params==="apartment"){
+            setPropertyType("Apartment")
+        }
+        if(params==="house"){
+            setPropertyType("House")
+        }
+        if(params==="guestHouse"){
+            setPropertyType("Guesthouse")
+        }
+        if(params==="apartment"){
+            setPropertyType("Apartment")
+        }
+  }
   const handleCount = (arg) => {
     if (arg === "adultDec") {
       const newCount = adult - 1;
@@ -195,7 +217,19 @@ const Search = () => {
   const needed ={
     showFilter,
     filterFunction,
-    tax,setTax,minValue,setMinValue,maxValue,setMaxValue,placeType,setPlaceType,bedrooms,setBedrooms,beds,setBeds,baths,setBaths
+    tax,setTax,minValue,setMinValue,maxValue,setMaxValue,placeType,setPlaceType,bedrooms,setBedrooms,beds,setBeds,baths,setBaths,setWifi,wifi,instantBooking,setInstantBooking,
+    airConditioning,
+    kitchen,
+    selfChecking,
+    allowsPet,
+    guestFavorite,
+    
+        setAirConditioning,
+    setAirConditioning,
+    setKitchen,
+    setSelfChecking,
+    setAllowsPet,
+    setGuestFavorite,handlePropertyType 
   }
   return (
     <div className="fixed top-20 min-w-[1780px]">

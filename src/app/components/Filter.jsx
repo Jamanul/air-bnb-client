@@ -1,29 +1,40 @@
 "use client";
 import React, { useState } from "react";
 import { BsFillTicketPerforatedFill } from "react-icons/bs";
-import { MdOutlineBedroomParent, MdTrendingUp } from "react-icons/md";
+import {
+  MdApartment,
+  MdHotel,
+  MdHouse,
+  MdOutlineBedroomParent,
+  MdTrendingUp,
+} from "react-icons/md";
 import { PiIslandBold } from "react-icons/pi";
 import { TbBeach } from "react-icons/tb";
-import { IoFilterSharp } from "react-icons/io5";
+import { IoFilterSharp, IoThunderstorm } from "react-icons/io5";
 import {
+  GiAngelWings,
   GiBarn,
   GiBedLamp,
   GiCampfire,
   GiCastle,
   GiCastleRuins,
+  GiCat,
   GiCaveEntrance,
   GiDesert,
   GiFarmTractor,
   GiFarmer,
   GiFishingBoat,
   GiFlake,
+  GiForkKnifeSpoon,
   GiGolfFlag,
   GiGrandPiano,
   GiHillFort,
   GiHills,
   GiHomeGarage,
   GiHoneycomb,
+  GiHouse,
   GiIceBomb,
+  GiKey,
   GiModernCity,
   GiMountaintop,
   GiParkBench,
@@ -31,6 +42,7 @@ import {
   GiSeaCliff,
   GiSkiBoot,
   GiSkier,
+  GiSnowflake1,
   GiSun,
   GiSurfBoard,
   GiTreehouse,
@@ -51,6 +63,7 @@ import "swiper/css/navigation";
 import "./styles.css";
 import { Pagination, Navigation } from "swiper/modules";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
+import { FaWifi } from "react-icons/fa6";
 const Filter = ({ needed }) => {
   const {
     filterFunction,
@@ -63,46 +76,62 @@ const Filter = ({ needed }) => {
     setMaxValue,
     placeType,
     setPlaceType,
-    bedrooms,setBedrooms,beds,setBeds,baths,setBaths
+    bedrooms,
+    setBedrooms,
+    beds,
+    setBeds,
+    baths,
+    setBaths,
+    setWifi,
+    setAirConditioning,
+    setKitchen,
+    setSelfChecking,
+    setAllowsPet,
+    setGuestFavorite,
+    wifi,
+    airConditioning,
+    kitchen,
+    selfChecking,
+    allowsPet,
+    guestFavorite,instantBooking,setInstantBooking,handlePropertyType 
+
   } = needed;
 
-  const handleBedAndRooms =(params)=>{
-    if(params==="bedroomsDec"){
-        const newCount =bedrooms-1
-        if(bedrooms<1){
-            return
-        }
-        setBedrooms(newCount) 
+  const handleBedAndRooms = (params) => {
+    if (params === "bedroomsDec") {
+      const newCount = bedrooms - 1;
+      if (bedrooms < 1) {
+        return;
+      }
+      setBedrooms(newCount);
     }
-    if(params ==="bedroomsInc"){
-        const newCount =bedrooms+1
-        setBedrooms(newCount) 
+    if (params === "bedroomsInc") {
+      const newCount = bedrooms + 1;
+      setBedrooms(newCount);
     }
-    if(params==="bedsDec"){
-        const newCount =beds-1
-        if(beds<1){
-            return
-        }
-        setBeds(newCount) 
+    if (params === "bedsDec") {
+      const newCount = beds - 1;
+      if (beds < 1) {
+        return;
+      }
+      setBeds(newCount);
     }
-    if(params ==="bedsInc"){
-        const newCount =beds+1
-        setBeds(newCount) 
+    if (params === "bedsInc") {
+      const newCount = beds + 1;
+      setBeds(newCount);
     }
-    if(params==="bathsDec"){
-        const newCount =baths-1
-        if(baths<1){
-            return
-        }
-        setBaths(newCount) 
+    if (params === "bathsDec") {
+      const newCount = baths - 1;
+      if (baths < 1) {
+        return;
+      }
+      setBaths(newCount);
     }
-    if(params ==="bathsInc"){
-        const newCount =baths+1
-        setBaths(newCount) 
+    if (params === "bathsInc") {
+      const newCount = baths + 1;
+      setBaths(newCount);
     }
-
-  }
-
+  };
 
   const handleMinChange = (e) => {
     const value = Math.min(Number(e.target.value), maxValue - 1);
@@ -284,20 +313,24 @@ const Filter = ({ needed }) => {
                     </div>
                     {/* beds and rooms */}
                     <div>
-                      <h2 className="py-6 border-t font-bold">Rooms and beds</h2>
+                      <h2 className="py-6 border-t font-bold">
+                        Rooms and beds
+                      </h2>
                       <div className="flex pb-6 justify-between">
                         <h2 className="font-medium">Bedrooms</h2>
                         <div className="grid grid-cols-3 gap-2 items-center justify-between">
                           <h2
                             className="text-3xl"
-                            onClick={()=>handleBedAndRooms("bedroomsDec")}
+                            onClick={() => handleBedAndRooms("bedroomsDec")}
                           >
                             <CiCircleMinus />
                           </h2>
-                          <h2 className="text-center">{bedrooms>0 ? bedrooms : "Any"}</h2>
+                          <h2 className="text-center">
+                            {bedrooms > 0 ? bedrooms : "Any"}
+                          </h2>
                           <h2
                             className="text-3xl"
-                            onClick={()=>handleBedAndRooms("bedroomsInc")}
+                            onClick={() => handleBedAndRooms("bedroomsInc")}
                           >
                             <CiCirclePlus />
                           </h2>
@@ -308,14 +341,16 @@ const Filter = ({ needed }) => {
                         <div className="grid grid-cols-3 gap-2 items-center justify-between">
                           <h2
                             className="text-3xl"
-                            onClick={()=>handleBedAndRooms("bedsDec")}
+                            onClick={() => handleBedAndRooms("bedsDec")}
                           >
                             <CiCircleMinus />
                           </h2>
-                          <h2 className="text-center">{beds>0 ? beds : "Any"}</h2>
+                          <h2 className="text-center">
+                            {beds > 0 ? beds : "Any"}
+                          </h2>
                           <h2
                             className="text-3xl"
-                            onClick={()=>handleBedAndRooms("bedsInc")}
+                            onClick={() => handleBedAndRooms("bedsInc")}
                           >
                             <CiCirclePlus />
                           </h2>
@@ -326,20 +361,98 @@ const Filter = ({ needed }) => {
                         <div className="grid grid-cols-3 gap-2 items-center justify-between">
                           <h2
                             className="text-3xl"
-                            onClick={()=>handleBedAndRooms("bathsDec")}
+                            onClick={() => handleBedAndRooms("bathsDec")}
                           >
                             <CiCircleMinus />
                           </h2>
-                          <h2 className="text-center">{baths>0 ? baths: "Any"}</h2>
+                          <h2 className="text-center">
+                            {baths > 0 ? baths : "Any"}
+                          </h2>
                           <h2
                             className="text-3xl"
-                            onClick={()=>handleBedAndRooms("bathsInc")}
+                            onClick={() => handleBedAndRooms("bathsInc")}
                           >
                             <CiCirclePlus />
                           </h2>
                         </div>
                       </div>
                     </div>
+                    {/* amenities  */}
+                    <div>
+                      <h2 className="py-6 border-t font-bold ">Amenities</h2>
+                      <div className="flex pb-6 gap-1">
+                        <h2
+                          onClick={() => setWifi(!wifi)}
+                          className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border"
+                        >
+                          <FaWifi /> Wifi
+                        </h2>
+                        <h2  onClick={() => setAirConditioning(!airConditioning)} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <GiSnowflake1 /> Air Condition
+                        </h2>
+                        <h2  onClick={() => setKitchen(!kitchen)} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <GiForkKnifeSpoon /> Kitchen
+                        </h2>
+                      </div>
+                    </div>
+                    {/* booking option */}
+                    <div className="border-b">
+                      <h2 className="py-6 border-t font-bold ">
+                        Booking options
+                      </h2>
+                      <div className="flex pb-8 gap-1">
+                        <h2  onClick={() => setInstantBooking(!instantBooking)} className="flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <IoThunderstorm /> Instant book
+                        </h2>
+                        <h2 onClick={() => setSelfChecking(!selfChecking)} className="flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <GiKey /> Self Checking
+                        </h2>
+                        <h2 onClick={() => setAllowsPet(!allowsPet)} className="flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <GiCat /> Allows Pets
+                        </h2>
+                      </div>
+                    </div>
+                    {/*Guest */}
+                    <div className="w-56">
+                      <h2 className="py-6  font-bold ">Standout Stays</h2>
+                      <div onClick={()=>setGuestFavorite(!guestFavorite)} className="flex items-center gap-4 border px-2 py-4 rounded-lg ">
+                        <div className="text-3xl">
+                          <GiAngelWings />
+                        </div>
+                        <div className="flex flex-col gap-2">
+                          <h2 className="font-bold">Guest Favorite</h2>
+                          <h2 className="font-bold text-sm text-gray-400">
+                            The most loved homes on Airbnb
+                          </h2>
+                        </div>
+                      </div>
+                    </div>
+                    {/* property Type */}
+                    <div className="border-b mt-6">
+                      <h2 className="py-6 border-t font-bold ">
+                        Property Type
+                      </h2>
+                      <div className="grid-cols-3 grid pb-8 gap-1">
+                        <h2 onClick={()=>{handlePropertyType('house')}} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <GiHouse /> House
+                        </h2>
+                        <h2 onClick={()=>{handlePropertyType('hotel')}} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <MdHotel /> Hotel
+                        </h2>
+                        <h2 onClick={()=>{handlePropertyType('apartment')}} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <MdApartment /> Apartment
+                        </h2>
+                        <h2 onClick={()=>{handlePropertyType('guestHouse')}} className="flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border">
+                          <MdHouse /> Guesthouse
+                        </h2>
+                      </div>
+                    </div>
+                    <form
+                      className="pt-4 flex items-center justify-end"
+                      method="dialog"
+                    >
+                      <button className="btn bg-black text-white">Show</button>
+                    </form>
                   </div>
                 </dialog>
               </div>
