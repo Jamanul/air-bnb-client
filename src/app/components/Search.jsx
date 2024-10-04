@@ -291,7 +291,7 @@ const Search = () => {
   //console.log(place)
   const handleSearch = async () => {
     setShowFilter(true);
-    const res = await axios.get("https://air-bnb-server-omega.vercel.app/allData", {
+    const res = await axios.get("https://air-bnb-server-pcpg.vercel.app/allData", {
       params: {
         checkInDate: startTimes,
         checkoutDate: endTimes,
@@ -328,7 +328,7 @@ const Search = () => {
   ]);
   //console.log(category)
   const getData = async () => {
-    const res = await axios.get("https://air-bnb-server-omega.vercel.app/allData", {
+    const res = await axios.get("https://air-bnb-server-pcpg.vercel.app/allData", {
       params: {
         category,
         allowsPet,
