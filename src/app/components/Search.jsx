@@ -11,22 +11,23 @@ import "react-date-range/dist/styles.css"; // main css file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import Filter from "./Filter";
 import axios from "axios";
+import Card from "./Card/Card";
 const Search = () => {
-    const [category,setCategory]=useState('Rooms')
-    const [wifi, setWifi] = useState(null);
-    const [airConditioning, setAirConditioning] = useState(null);
-    const [kitchen, setKitchen] = useState(null);
-    const [selfChecking, setSelfChecking] = useState(null);
-    const [instantBooking,setInstantBooking]=useState(null)
-    const [allowsPet, setAllowsPet] = useState(null);
-    const [guestFavourite, setGuestFavourite] = useState(null);
+  const [category, setCategory] = useState("Icons");
+  const [wifi, setWifi] = useState(null);
+  const [airConditioning, setAirConditioning] = useState(null);
+  const [kitchen, setKitchen] = useState(null);
+  const [selfChecking, setSelfChecking] = useState(null);
+  const [instantBooking, setInstantBooking] = useState(null);
+  const [allowsPet, setAllowsPet] = useState(null);
+  const [guestFavourite, setGuestFavourite] = useState(null);
   const [startTimes, setStartTimes] = useState("");
   const [endTimes, setEndTimes] = useState("");
-  const [minValue, setMinValue] = useState(100); 
-  const [maxValue, setMaxValue] = useState(900); 
-    const [bedroomsCount,setBedroomsCount] =useState(0)
-    const [beds,setBeds] =useState(0)
-    const [bathCount,setBathCount] =useState(0)
+  const [minValue, setMinValue] = useState(100);
+  const [maxValue, setMaxValue] = useState(900);
+  const [bedroomsCount, setBedroomsCount] = useState(0);
+  const [beds, setBeds] = useState(0);
+  const [bathCount, setBathCount] = useState(0);
   const [state, setState] = useState([
     {
       startDate: new Date(),
@@ -45,9 +46,10 @@ const Search = () => {
     month: "numeric",
     day: "numeric",
   });
-  //console.log(startTime,endTime)
-  const [placeType,setPlaceType]=useState('')
-  const [propertyType,setPropertyType]=useState('')
+  console.log(startTime, endTime);
+  //console.log(startTimes,endTimes)
+  const [placeType, setPlaceType] = useState("");
+  const [propertyType, setPropertyType] = useState("");
   const [place, setPlace] = useState("");
   const [placeButton, setPlaceButton] = useState(false);
   const [isLocationVisible, setIsLocationVisible] = useState(false);
@@ -62,22 +64,23 @@ const Search = () => {
   const [pet, setPet] = useState(0);
   const [totalGuest, setTotalGuest] = useState(0);
   const [navMoved, setNavMoved] = useState(false);
-  const [showFilter,setShowFilter]=useState(false)
-  const [tax,setTax]=useState(false)
-  const handlePropertyType =(params)=>{
-        if(params==="apartment"){
-            setPropertyType("Apartment")
-        }
-        if(params==="house"){
-            setPropertyType("House")
-        }
-        if(params==="guestHouse"){
-            setPropertyType("Guesthouse")
-        }
-        if(params==="hotel"){
-            setPropertyType("Hotel")
-        }
-  }
+  const [showFilter, setShowFilter] = useState(false);
+  const [tax, setTax] = useState(false);
+  const [propertyData, setPropertyData] = useState([]);
+  const handlePropertyType = (params) => {
+    if (params === "apartment") {
+      setPropertyType("Apartment");
+    }
+    if (params === "house") {
+      setPropertyType("House");
+    }
+    if (params === "guestHouse") {
+      setPropertyType("Guesthouse");
+    }
+    if (params === "hotel") {
+      setPropertyType("Hotel");
+    }
+  };
   const handleCount = (arg) => {
     if (arg === "adultDec") {
       const newCount = adult - 1;
@@ -204,46 +207,65 @@ const Search = () => {
     setPlace(value);
     setPlaceButton(value.length > 0);
   };
-  const handlePlaceButton = () => {
+  const handlePlaceButton = (e) => {
+    e.preventDefault();
     setPlace("");
   };
-  const filterFunction =(category)=>{
+  const filterFunction = (category) => {
     //console.log(category)
-    if(category == 'icons'){
-        setShowFilter(false)
-        setCategory('icons')
+    if (category == "Icons") {
+      setShowFilter(false);
+      setCategory("Icons");
+    } else {
+      setShowFilter(true);
+      setCategory(category);
     }
-    else{
-        setShowFilter(true)
-        setCategory(category)
-    }
-  }
-  const handlePet=()=>{
-   //console.log(allowsPet)
-   setAllowsPet(prevAllowsPet => prevAllowsPet === null ? true : null); 
-  }
-  const handleWifi =()=>{
-    setWifi(prevWifi => prevWifi === null ? true :null)
-  }
-  const handleAirConditioning=()=>{
-    setAirConditioning(prevAirConditioning => prevAirConditioning === null ? true :null)
-  }
-  const handleKitchen =()=>{
-    setKitchen(prevKitchen=>prevKitchen ===null ? true : null)
-  }
-  const handleInstantBooking =()=>{
-    setInstantBooking(prev=>prev ===null?true:null)
-  }
-  const handleSelfChecking =()=>{
-    setSelfChecking(prev=>prev ===null?true:null)
-  }
-  const handleGuestFavourite =()=>{
-    setGuestFavourite(prev=>prev ===null?true:null)
-  }
-  const needed ={
+  };
+  const handlePet = () => {
+    //console.log(allowsPet)
+    setAllowsPet((prevAllowsPet) => (prevAllowsPet === null ? true : null));
+  };
+  const handleWifi = () => {
+    setWifi((prevWifi) => (prevWifi === null ? true : null));
+  };
+  const handleAirConditioning = () => {
+    setAirConditioning((prevAirConditioning) =>
+      prevAirConditioning === null ? true : null
+    );
+  };
+  const handleKitchen = () => {
+    setKitchen((prevKitchen) => (prevKitchen === null ? true : null));
+  };
+  const handleInstantBooking = () => {
+    setInstantBooking((prev) => (prev === null ? true : null));
+  };
+  const handleSelfChecking = () => {
+    setSelfChecking((prev) => (prev === null ? true : null));
+  };
+  const handleGuestFavourite = () => {
+    setGuestFavourite((prev) => (prev === null ? true : null));
+  };
+  const needed = {
     showFilter,
     filterFunction,
-    tax,setTax,minValue,setMinValue,maxValue,setMaxValue,placeType,setPlaceType,bedroomsCount,setBedroomsCount,beds,setBeds,bathCount,setBathCount,setWifi,wifi,instantBooking,setInstantBooking,
+    tax,
+    setTax,
+    minValue,
+    setMinValue,
+    maxValue,
+    setMaxValue,
+    placeType,
+    setPlaceType,
+    bedroomsCount,
+    setBedroomsCount,
+    beds,
+    setBeds,
+    bathCount,
+    setBathCount,
+    setWifi,
+    wifi,
+    instantBooking,
+    setInstantBooking,
     airConditioning,
     kitchen,
     selfChecking,
@@ -254,23 +276,89 @@ const Search = () => {
     setKitchen,
     setSelfChecking,
     setAllowsPet,
-    setGuestFavourite,handlePropertyType,propertyType,handlePet,handleWifi,handleAirConditioning,handleKitchen,handleInstantBooking, handleSelfChecking,handleGuestFavourite
-  }
-  
-  useEffect(()=>{
-    console.log('data is called')
-    getData()
-  },[category,allowsPet,wifi,airConditioning,kitchen,instantBooking,selfChecking,guestFavourite,propertyType,bedroomsCount,beds,bathCount])
-  console.log(category)
-  const getData = async () =>{
-    const res =await axios.get('http://localhost:5000/allData',{params:{category,allowsPet,wifi,airConditioning,kitchen,instantBooking,selfChecking,guestFavourite,propertyType,bedroomsCount,beds,bathCount}})
-    const data =await res.data
-    console.log(data)
-  }
+    setGuestFavourite,
+    handlePropertyType,
+    propertyType,
+    handlePet,
+    handleWifi,
+    handleAirConditioning,
+    handleKitchen,
+    handleInstantBooking,
+    handleSelfChecking,
+    handleGuestFavourite,
+    propertyData
+  };
+  //console.log(place)
+  const handleSearch = async () => {
+    setShowFilter(true);
+    const res = await axios.get("https://air-bnb-server-omega.vercel.app/allData", {
+      params: {
+        checkInDate: startTimes,
+        checkoutDate: endTimes,
+        countryLocation: place,
+        guestCount: totalGuest,
+      },
+    });
+    const data = await res.data;
+    console.log(data);
+    setPropertyData(data);
+  };
+  useEffect(() => {
+    console.log("data is called");
+    getData();
+  }, [
+    category,
+    allowsPet,
+    wifi,
+    airConditioning,
+    kitchen,
+    instantBooking,
+    selfChecking,
+    guestFavourite,
+    propertyType,
+    bedroomsCount,
+    beds,
+    bathCount,
+    minValue,
+    maxValue,
+    startTimes,
+    endTimes,
+    place,
+    totalGuest,
+  ]);
+  //console.log(category)
+  const getData = async () => {
+    const res = await axios.get("https://air-bnb-server-omega.vercel.app/allData", {
+      params: {
+        category,
+        allowsPet,
+        wifi,
+        airConditioning,
+        kitchen,
+        instantBooking,
+        selfChecking,
+        guestFavourite,
+        propertyType,
+        checkInDate: startTimes,
+        checkoutDate: endTimes,
+        countryLocation: place,
+        guestCount: totalGuest,
+        bedroomsCount,
+        beds,
+        bathCount,
+        minValue,
+        maxValue,
+      },
+    });
+    const data = await res.data;
+    setPropertyData(data);
+    //console.log(data)
+  };
+  console.log(propertyData);
   return (
-    <div className="fixed top-20 min-w-[1780px]">
+    <div className="   ">
       {/* search section */}
-      <div className="border-b pb-6">
+      <div className="fixed z-10 bg-white top-20 min-w-[1780px] border-b pb-6">
         <div
           className={`${
             isLocationVisible || isCalenderVisible || isCountVisible
@@ -278,7 +366,7 @@ const Search = () => {
               : ""
           } border relative shadow-md  max-w-[800px] mx-auto rounded-r-full rounded-l-full`}
         >
-          <form className="grid grid-cols-10">
+          <div className="grid grid-cols-10">
             <div className="col-span-3 group ">
               <div
                 onClick={handleLocationDiv}
@@ -316,7 +404,7 @@ const Search = () => {
             {isLocationVisible && (
               <div
                 ref={locationDivRef}
-                className="max-w-[400px] bg-white shadow-md px-6 py-4 rounded-3xl mt-20 absolute"
+                className="max-w-[400px] z-[999] bg-white shadow-md px-6 py-4 rounded-3xl mt-20 absolute"
               >
                 <div className="grid grid-cols-3 gap-1">
                   {worldLocations?.map((map) => (
@@ -370,7 +458,7 @@ const Search = () => {
             {isCalenderVisible && (
               <div
                 ref={calenderDivRef}
-                className="absolute max-w-[800px] mt-20 round"
+                className="absolute z-[999] max-w-[800px] mt-20 round"
               >
                 <DateRangePicker
                   onChange={(item) => setState([item.selection])}
@@ -391,20 +479,31 @@ const Search = () => {
               onClick={handleCountDiv}
               className={`${
                 isCountVisible
-                  ? "bg-white rounded-l-full rounded-r-full group-hover:bg-white "
+                  ? "bg-white rounded-l-full rounded-r-full group-hover:bg-white hover:bg-white"
                   : ""
               } group  hover:bg-slate-300 flex justify-between px-2 hover:rounded-r-full hover:rounded-l-full items-center col-span-3`}
             >
-              <div className="py-4 hover:my-0  flex flex-col relative group-hover:bg-slate-300 group-hover:rounded-r-full rounded-l-full">
+              <div
+                className={`${
+                  isCountVisible
+                    ? "group-hover:bg-white"
+                    : "group-hover:bg-slate-300"
+                } py-4 hover:my-0  flex flex-col relative  group-hover:rounded-r-full rounded-l-full`}
+              >
                 <h2 className="text-sm font-bold">Who</h2>
-                <h2 className="text-sm font-bold text-gray-500">Add Guests</h2>
+                <h2 className="text-sm font-bold text-gray-500">
+                  {totalGuest > 0 ? `${totalGuest} Guests` : "Add Guests"}
+                </h2>
               </div>
               <div className="pr-2">
-                <button className="p-4 flex items-center gap-1 rounded-full bg-primary text-white">
+                <button
+                  onClick={handleSearch}
+                  className="p-4 flex items-center gap-1 rounded-full bg-primary text-white"
+                >
                   <FaMagnifyingGlass />
                   <span
                     className={`${
-                      isCalenderVisible || isLocationVisible
+                      isCalenderVisible || isLocationVisible || isCountVisible
                         ? "inline opacity-100 "
                         : "opacity-0  hidden"
                     } transition-opacity duration-300 ease-in-out `}
@@ -417,7 +516,7 @@ const Search = () => {
             {isCountVisible && (
               <div
                 ref={countDivRef}
-                className="max-w-[400px] right-0 bg-white shadow-md px-6 py-4 rounded-3xl mt-20 absolute"
+                className="max-w-[400px] z-[999] right-0 bg-white shadow-md px-6 py-4 rounded-3xl mt-20 absolute"
               >
                 <div className="flex w-80 py-4 mx-2 border-b justify-between">
                   <div className="flex flex-col">
@@ -513,11 +612,16 @@ const Search = () => {
                 </div>
               </div>
             )}
-          </form>
+          </div>
         </div>
       </div>
-      <div>
-        <Filter needed={needed} />
+      <div className="mt-40">
+        <Filter  needed={needed} />
+      </div>
+      <div className="mt-12  grid grid-cols-6">
+        {propertyData.map((property) => (
+          <Card key={property._id} property={property} tax={tax}></Card>
+        ))}
       </div>
     </div>
   );

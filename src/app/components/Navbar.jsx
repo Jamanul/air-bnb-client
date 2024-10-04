@@ -9,7 +9,7 @@ import { IoPersonCircleSharp } from "react-icons/io5";
 const Navbar = () => {
  
   return (
-    <div className="fixed  pb-8 lg:min-w-[1780px]">
+    <div className="fixed z-10 top-0 bg-white  md:min-w-[1780px]">
       {/* first navbar */}
       <div className="flex justify-between items-center">
         <h2 className={` flex items-center gap-1 text-2xl my-6 text-primary font-bold `}>

@@ -64,6 +64,7 @@ import "./styles.css";
 import { Pagination, Navigation } from "swiper/modules";
 import { CiCircleMinus, CiCirclePlus } from "react-icons/ci";
 import { FaWifi } from "react-icons/fa6";
+import Card from "./Card/Card";
 const Filter = ({ needed }) => {
   const {
     filterFunction,
@@ -87,10 +88,21 @@ const Filter = ({ needed }) => {
     kitchen,
     selfChecking,
     allowsPet,
-    guestFavourite,instantBooking,setInstantBooking,handlePropertyType,propertyType,handlePet,handleWifi,handleAirConditioning,handleKitchen,handleInstantBooking, handleSelfChecking,handleGuestFavourite
-
+    guestFavourite,
+    instantBooking,
+    setInstantBooking,
+    handlePropertyType,
+    propertyType,
+    handlePet,
+    handleWifi,
+    handleAirConditioning,
+    handleKitchen,
+    handleInstantBooking,
+    handleSelfChecking,
+    handleGuestFavourite,
+    propertyData,
   } = needed;
-
+  console.log(propertyData);
   const handleBedAndRooms = (params) => {
     if (params === "bedroomsDec") {
       const newCount = bedroomsCount - 1;
@@ -126,7 +138,7 @@ const Filter = ({ needed }) => {
       setBathCount(newCount);
     }
   };
-  console.log(bedroomsCount)
+  console.log(bedroomsCount);
   const handleMinChange = (e) => {
     const value = Math.min(Number(e.target.value), maxValue - 1);
     setMinValue(value);
@@ -138,8 +150,8 @@ const Filter = ({ needed }) => {
   };
   //console.log(tax);
   return (
-    <div>
-      <div className="flex max-w-[1780px]">
+    <div className="flex flex-col">
+      <div className="flex z-10s max-w-[1780px]">
         <>
           <Swiper
             slidesPerView={1}
@@ -377,14 +389,28 @@ const Filter = ({ needed }) => {
                       <div className="flex pb-6 gap-1">
                         <h2
                           onClick={() => handleWifi()}
-                          className={`${wifi? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                          className={`${
+                            wifi ? "bg-gray-100 border border-black" : ""
+                          } flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
                         >
                           <FaWifi /> Wifi
                         </h2>
-                        <h2  onClick={() => handleAirConditioning()} className={`${airConditioning? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={() => handleAirConditioning()}
+                          className={`${
+                            airConditioning
+                              ? "bg-gray-100 border border-black"
+                              : ""
+                          } flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <GiSnowflake1 /> Air Condition
                         </h2>
-                        <h2  onClick={() => handleKitchen()} className={`${kitchen? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={() => handleKitchen()}
+                          className={`${
+                            kitchen ? "bg-gray-100 border border-black" : ""
+                          } flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <GiForkKnifeSpoon /> Kitchen
                         </h2>
                       </div>
@@ -395,13 +421,32 @@ const Filter = ({ needed }) => {
                         Booking options
                       </h2>
                       <div className="flex pb-8 gap-1">
-                        <h2  onClick={() => handleInstantBooking()} className={`${instantBooking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={() => handleInstantBooking()}
+                          className={`${
+                            instantBooking
+                              ? "bg-gray-100 border border-black"
+                              : ""
+                          } flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <IoThunderstorm /> Instant book
                         </h2>
-                        <h2 onClick={() =>  handleSelfChecking()} className={`${selfChecking? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={() => handleSelfChecking()}
+                          className={`${
+                            selfChecking
+                              ? "bg-gray-100 border border-black"
+                              : ""
+                          } flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <GiKey /> Self Checking
                         </h2>
-                        <h2 onClick={ handlePet} className={`${allowsPet? "bg-gray-100 border border-black": ""} flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={handlePet}
+                          className={`${
+                            allowsPet ? "bg-gray-100 border border-black" : ""
+                          } flex items-center text-sm rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <GiCat /> Allows Pets
                         </h2>
                       </div>
@@ -409,7 +454,14 @@ const Filter = ({ needed }) => {
                     {/*Guest */}
                     <div className="w-56">
                       <h2 className="py-6  font-bold ">Standout Stays</h2>
-                      <div onClick={()=>handleGuestFavourite()} className={`${guestFavourite? "bg-gray-100 border border-black": ""} flex items-center gap-4 border px-2 py-4 rounded-lg `}>
+                      <div
+                        onClick={() => handleGuestFavourite()}
+                        className={`${
+                          guestFavourite
+                            ? "bg-gray-100 border border-black"
+                            : ""
+                        } flex items-center gap-4 border px-2 py-4 rounded-lg `}
+                      >
                         <div className="text-3xl">
                           <GiAngelWings />
                         </div>
@@ -427,16 +479,52 @@ const Filter = ({ needed }) => {
                         Property Type
                       </h2>
                       <div className="grid-cols-3 grid pb-8 gap-1">
-                        <h2 onClick={()=>{handlePropertyType('house')}} className={`${propertyType ==='House'? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={() => {
+                            handlePropertyType("house");
+                          }}
+                          className={`${
+                            propertyType === "House"
+                              ? "bg-gray-100 border border-black"
+                              : ""
+                          } flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <GiHouse /> House
                         </h2>
-                        <h2 onClick={()=>{handlePropertyType('hotel')}} className={`${propertyType ==='Hotel'? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={() => {
+                            handlePropertyType("hotel");
+                          }}
+                          className={`${
+                            propertyType === "Hotel"
+                              ? "bg-gray-100 border border-black"
+                              : ""
+                          } flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <MdHotel /> Hotel
                         </h2>
-                        <h2 onClick={()=>{handlePropertyType('apartment')}} className={`${propertyType ==='Apartment'? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={() => {
+                            handlePropertyType("apartment");
+                          }}
+                          className={`${
+                            propertyType === "Apartment"
+                              ? "bg-gray-100 border border-black"
+                              : ""
+                          } flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <MdApartment /> Apartment
                         </h2>
-                        <h2 onClick={()=>{handlePropertyType('guestHouse')}} className={`${propertyType ==='Guesthouse'? "bg-gray-100 border border-black": ""} flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}>
+                        <h2
+                          onClick={() => {
+                            handlePropertyType("guestHouse");
+                          }}
+                          className={`${
+                            propertyType === "Guesthouse"
+                              ? "bg-gray-100 border border-black"
+                              : ""
+                          } flex items-center rounded-r-full rounded-l-full px-4 py-2 gap-1 border`}
+                        >
                           <MdHouse /> Guesthouse
                         </h2>
                       </div>
@@ -462,6 +550,11 @@ const Filter = ({ needed }) => {
           )}
         </div>
       </div>
+      {/* <div className="mt-12 grid grid-cols-6">
+        {propertyData.map((property) => (
+          <Card key={property._id} property={property} tax={tax}></Card>
+        ))}
+      </div> */}
     </div>
   );
 };
@@ -473,44 +566,39 @@ const icons1 = [
   { name: "Rooms", element: <MdOutlineBedroomParent /> },
   { name: "Countryside", element: <PiIslandBold /> },
   { name: "OMG", element: <TbBeach /> },
-  { name: "Lakefront", element: <GiBoatFishing /> },
   { name: "Windmills", element: <GiWindmill /> },
   { name: "Amazing Views", element: <MdLandslide></MdLandslide> },
   { name: "Bed & Breakfast", element: <GiBedLamp /> },
-  { name: "Top of the world new", element: <GiMountaintop /> },
-  { name: "Tiny homes", element: <GiHomeGarage /> },
+  { name: "Top of the World", element: <GiMountaintop /> },
+  { name: "Tiny Homes", element: <GiHomeGarage /> },
   { name: "Camping", element: <GiCampfire /> },
-  { name: "Amazing pools", element: <GiPoolDive /> },
+  { name: "Amazing Pools", element: <GiPoolDive /> },
   { name: "Houseboats", element: <IoBoatSharp /> },
   { name: "Cabins", element: <GiWoodCabin /> },
-  { name: "National parks", element: <GiParkBench /> },
+  { name: "National Parks", element: <GiParkBench /> },
   { name: "Caves", element: <GiCaveEntrance /> },
   { name: "Hanoks", element: <HiHomeModern /> },
   { name: "Skiing", element: <GiSkiBoot /> },
   { name: "Beach", element: <GiWaves /> },
   { name: "Desert", element: <GiDesert /> },
-  { name: "Ski", element: <GiSkier /> },
+  { name: "Luxe", element: <GiFlake /> },
 ];
 
 const icons2 = [
-  { name: "Luxe", element: <GiFlake /> },
   { name: "Lake", element: <GiFishingBoat /> },
   { name: "Tropical", element: <GiSun /> },
   { name: "Castles", element: <GiCastle /> },
-  { name: "Off the grid", element: <GiSeaCliff /> },
+  { name: "Off the Grid", element: <GiSeaCliff /> },
   { name: "Design", element: <GiHoneycomb /> },
   { name: "Barns", element: <GiBarn /> },
-  { name: "Top cities", element: <GiModernCity /> },
-  { name: "Golfing", element: <GiGolfFlag /> },
+  { name: "Top Cities", element: <GiModernCity /> },
   { name: "Trulli", element: <GiHills /> },
-  { name: "Mantions", element: <GiHillFort /> },
   { name: "Trending", element: <MdTrendingUp /> },
-  { name: "Tree houses", element: <GiTreehouse /> },
   { name: "Farms", element: <GiFarmTractor /> },
   { name: "Campers", element: <GiCampfire /> },
   { name: "Surfing", element: <GiSurfBoard /> },
-  { name: "Earth homes", element: <GiBarn /> },
-  { name: "A-framers", element: <GiFarmer /> },
-  { name: "Historical homes", element: <GiCastleRuins /> },
+  { name: "Earth Homes", element: <GiBarn /> },
+  { name: "A-Frame", element: <GiFarmer /> },
+  { name: "Historical Homes", element: <GiCastleRuins /> },
   { name: "Vineyard", element: <GiVineFlower /> },
 ];

@@ -1,0 +1,110 @@
+#app {
+    height: 100%;
+}
+.swiper {
+    width: 100%;
+    height: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative; /* Ensure positioning context for buttons */
+}
+
+.swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.swiper-slide img {
+    width: 270px;
+    height: 255px;
+    object-fit: cover;
+}
+
+.swiper-button-prev,
+.swiper-button-next {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border: 2px solid black;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    transition: opacity 0.3s ease, background-color 0.3s ease, color 0.3s ease;
+    opacity: 0; /* Hide buttons by default */
+    position: absolute; /* Position buttons absolutely within .swiper */
+    top: 60%;
+    transform: translateY(-50%);
+    z-index: 10; /* Ensure buttons are above other elements */
+}
+
+.swiper-button-prev {
+    left: 10px; /* Adjust as needed */
+}
+
+.swiper-button-next {
+    right: 10px; /* Adjust as needed */
+}
+
+.swiper:hover .swiper-button-prev,
+.swiper:hover .swiper-button-next {
+    opacity: 1; /* Show buttons on hover */
+}
+
+.swiper-button-prev::after,
+.swiper-button-next::after {
+    font-size: 16px;
+}
+
+/* Range Slider Styles */
+input[type="range"]::-webkit-slider-thumb {
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 2px solid gray;
+    cursor: pointer;
+    pointer-events: all;
+    border-radius: 50%;
+    position: relative;
+    z-index: 2;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border: 2px solid gray;
+    cursor: pointer;
+    border-radius: 50%;
+    position: relative;
+}
+
+.min-slider::-webkit-slider-thumb {
+    transform: translateY(15px);
+    z-index: 3;
+}
+
+.min-slider::-moz-range-thumb {
+    transform: translateY(15px);
+    z-index: 3;
+}
+
+.max-slider::-webkit-slider-thumb {
+    transform: translateY(-15px);
+    z-index: 2;
+}
+
+.max-slider::-moz-range-thumb {
+    transform: translateY(-15px);
+    z-index: 2;
+}
+
+input[type="range"]:focus {
+    outline: none;
+}
