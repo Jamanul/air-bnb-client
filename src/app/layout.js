@@ -31,10 +31,10 @@ export default function RootLayout({ children }) {
       <body
         className={manrope.className}
       >
-        <div className="max-w-[1780px] mx-auto ">
+        <div className="max-w-[1780px] mx-auto bg-white">
           <Navbar/>
         </div>
-        <div className="max-w-[1780px] mx-auto min-h-screen">
+        <div className="max-w-[1780px] mx-auto min-h-screen bg-white">
            {children}
         </div>
         <Footer/>
