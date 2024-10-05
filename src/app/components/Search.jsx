@@ -14,6 +14,7 @@ import axios from "axios";
 import Card from "./Card/Card";
 const Search = () => {
   const [category, setCategory] = useState("Icons");
+  const [test,setTest]=useState(flase)
   const [wifi, setWifi] = useState(null);
   const [airConditioning, setAirConditioning] = useState(null);
   const [kitchen, setKitchen] = useState(null);
@@ -286,7 +287,7 @@ const Search = () => {
     handleInstantBooking,
     handleSelfChecking,
     handleGuestFavourite,
-    propertyData
+    propertyData,setTest
   };
   //console.log(place)
   const handleSearch = async () => {
@@ -311,7 +312,9 @@ const Search = () => {
   ]);
   useEffect(() => {
     //console.log("data is called");
+   if(test){
     getDataOne();
+   }
   }, [
     allowsPet,
     wifi,
@@ -330,6 +333,7 @@ const Search = () => {
     endTimes,
     place,
     totalGuest,
+    test
   ]);
   //console.log(category)
   const getDataOne = async () => {
@@ -388,9 +392,9 @@ const Search = () => {
   };
   console.log(propertyData);
   return (
-    <div className="   ">
+    <div  className="   ">
       {/* search section */}
-      <div className="fixed z-10 bg-white top-20 min-w-[1780px] border-b pb-6">
+      <div onClick={()=>setTest(true)} className="fixed z-10 bg-white top-20 min-w-[1780px] border-b pb-6">
         <div
           className={`${
             isLocationVisible || isCalenderVisible || isCountVisible
@@ -650,7 +654,7 @@ const Search = () => {
       <div className="mt-40">
         <Filter  needed={needed} />
       </div>
-      <div className="mt-12  grid grid-cols-6">
+      <div className="mt-12  grid grid-cols-1 md:grid-cols-6">
         {propertyData.map((property) => (
           <Card key={property._id} property={property} tax={tax}></Card>
         ))}

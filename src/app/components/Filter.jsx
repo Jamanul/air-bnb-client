@@ -101,6 +101,7 @@ const Filter = ({ needed }) => {
     handleSelfChecking,
     handleGuestFavourite,
     propertyData,
+    setTest
   } = needed;
   console.log(propertyData);
   const handleBedAndRooms = (params) => {
@@ -194,7 +195,7 @@ const Filter = ({ needed }) => {
         </>
         <div>
           {showFilter && (
-            <div className="flex gap-2 items-center justify-center h-[120px]">
+            <div onClick={()=>setTest(true)} className="flex gap-2 items-center justify-center h-[120px]">
               <div>
                 <button
                   onClick={() =>
