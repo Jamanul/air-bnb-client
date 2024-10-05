@@ -28,15 +28,29 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-    <body className={`${manrope.className} bg-white text-black`}>
-      <div className="max-w-[1780px] mx-auto bg-white">
-        <Navbar/>
-      </div>
-      <div className="max-w-[1780px] mx-auto min-h-screen bg-white">
-        {children}
-      </div>
-      <Footer/>
-    </body>
-  </html>
+      <head>
+        <style jsx global>{`
+          body {
+            background-color: white;
+            color: black;
+          }
+          @media (prefers-color-scheme: dark) {
+            body {
+              background-color: white !important;
+              color: black !important;
+            }
+          }
+        `}</style>
+      </head>
+      <body className={`${manrope.className}`}>
+        <div className="max-w-[1780px] mx-auto bg-white">
+          <Navbar />
+        </div>
+        <div className="max-w-[1780px] mx-auto min-h-screen bg-white">
+          {children}
+        </div>
+        <Footer />
+      </body>
+    </html>
   );
 }
