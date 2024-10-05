@@ -14,7 +14,7 @@ import axios from "axios";
 import Card from "./Card/Card";
 const Search = () => {
   const [category, setCategory] = useState("Icons");
-  const [test,setTest]=useState(flase)
+  const [test,setTest]=useState(false)
   const [wifi, setWifi] = useState(null);
   const [airConditioning, setAirConditioning] = useState(null);
   const [kitchen, setKitchen] = useState(null);
