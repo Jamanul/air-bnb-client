@@ -7,7 +7,7 @@
   --foreground: #171717; /* Text color */
 }
 :root {
-  color-scheme: only light;
+  color-scheme: light;
 }
 
 body {
