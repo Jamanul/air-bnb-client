@@ -3,7 +3,8 @@
 @tailwind utilities;
 
 :root {
-  color-scheme: light;
+  --background: #ffffff; /* Always white */
+  --foreground: #171717; /* Text color */
 }
 
 body {
