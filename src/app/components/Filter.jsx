@@ -533,7 +533,7 @@ const Filter = ({ needed }) => {
                       className="pt-4 flex items-center justify-end"
                       method="dialog"
                     >
-                      <button className="btn bg-black text-white">Show</button>
+                      <button className="btn bg-black text-white">Show {propertyData.length> 0 ? propertyData.length : ""}</button>
                     </form>
                   </div>
                 </dialog>
