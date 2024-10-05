@@ -304,10 +304,15 @@ const Search = () => {
     setPropertyData(data);
   };
   useEffect(() => {
-    console.log("data is called");
+    //console.log("data is called");
     getData();
   }, [
     category,
+  ]);
+  useEffect(() => {
+    //console.log("data is called");
+    getDataOne();
+  }, [
     allowsPet,
     wifi,
     airConditioning,
@@ -327,6 +332,33 @@ const Search = () => {
     totalGuest,
   ]);
   //console.log(category)
+  const getDataOne = async () => {
+    const res = await axios.get("https://air-bnb-server-5ej6.vercel.app/search", {
+      params: {
+        category,
+        allowsPet,
+        wifi,
+        airConditioning,
+        kitchen,
+        instantBooking,
+        selfChecking,
+        guestFavourite,
+        propertyType,
+        checkInDate: startTimes,
+        checkoutDate: endTimes,
+        countryLocation: place,
+        guestCount: totalGuest,
+        bedroomsCount,
+        beds,
+        bathCount,
+        minValue,
+        maxValue,
+      },
+    });
+    const data = await res.data;
+    setPropertyData(data);
+    //console.log(data)
+  };
   const getData = async () => {
     const res = await axios.get("https://air-bnb-server-5ej6.vercel.app/allData", {
       params: {
