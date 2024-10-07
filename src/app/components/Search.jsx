@@ -251,7 +251,7 @@ const Search = () => {
     setTest(true)
   }
   const handleSearchData =(e)=>{
-    e.preventDefault
+    e.preventDefault()
     console.log("magic happens in search")
     setTest(true)
     getDataOne();
