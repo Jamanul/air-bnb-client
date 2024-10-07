@@ -101,7 +101,7 @@ const Filter = ({ needed }) => {
     handleSelfChecking,
     handleGuestFavourite,
     propertyData,
-    setTest
+    setTest, handleData
   } = needed;
   console.log(propertyData);
   const handleBedAndRooms = (params) => {
@@ -534,7 +534,7 @@ const Filter = ({ needed }) => {
                       className="pt-4 flex items-center justify-end"
                       method="dialog"
                     >
-                      <button className="btn bg-black text-white">Show {propertyData.length> 0 ? propertyData.length : ""}</button>
+                      <button onClick={ handleData} className="btn bg-black text-white">Show {propertyData.length> 0 ? propertyData.length : ""}</button>
                     </form>
                   </div>
                 </dialog>

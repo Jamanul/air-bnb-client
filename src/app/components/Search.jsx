@@ -246,6 +246,9 @@ const Search = () => {
   const handleGuestFavourite = () => {
     setGuestFavourite((prev) => (prev === null ? true : null));
   };
+  const handleData =()=>{
+    console.log("magic happens")
+  }
   const needed = {
     showFilter,
     filterFunction,
@@ -287,7 +290,7 @@ const Search = () => {
     handleInstantBooking,
     handleSelfChecking,
     handleGuestFavourite,
-    propertyData,setTest
+    propertyData,setTest, handleData
   };
   //console.log(place)
   const handleSearch = async () => {
@@ -533,7 +536,7 @@ const Search = () => {
               </div>
               <div className="pr-2">
                 <button
-                  onClick={handleSearch}
+                  onClick={handleData}
                   className="p-4 flex items-center gap-1 rounded-full bg-primary text-white"
                 >
                   <FaMagnifyingGlass />
