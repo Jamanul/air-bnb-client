@@ -195,7 +195,7 @@ const Filter = ({ needed }) => {
         </>
         <div>
           {showFilter && (
-            <div onClick={()=>setTest(true)} className="flex gap-2 items-center justify-center h-[120px]">
+            <div className="flex gap-2 items-center justify-center h-[120px]">
               <div>
                 <button
                   onClick={() =>

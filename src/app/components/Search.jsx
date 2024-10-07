@@ -248,6 +248,7 @@ const Search = () => {
   };
   const handleData =()=>{
     console.log("magic happens")
+    setTest(true)
   }
   const needed = {
     showFilter,
@@ -397,7 +398,7 @@ const Search = () => {
   return (
     <div  className="   ">
       {/* search section */}
-      <div onClick={()=>setTest(true)} className="fixed z-10 bg-white top-20 min-w-[1780px] border-b pb-6">
+      <form onSubmit={handleData} className="fixed z-10 bg-white top-20 min-w-[1780px] border-b pb-6">
         <div
           className={`${
             isLocationVisible || isCalenderVisible || isCountVisible
@@ -428,7 +429,7 @@ const Search = () => {
                   } focus:outline-none text-sm group-hover:bg-slate-300`}
                   placeholder="Search destinations"
                 />
-                {placeButton ? (
+                {/* {placeButton ? (
                   <button
                     className="absolute right-2 top-7 text-sm"
                     onClick={handlePlaceButton}
@@ -437,7 +438,7 @@ const Search = () => {
                   </button>
                 ) : (
                   <></>
-                )}
+                )} */}
               </div>
             </div>
             {isLocationVisible && (
@@ -653,7 +654,7 @@ const Search = () => {
             )}
           </div>
         </div>
-      </div>
+      </form>
       <div className="mt-40">
         <Filter  needed={needed} />
       </div>
