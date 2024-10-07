@@ -246,10 +246,17 @@ const Search = () => {
   const handleGuestFavourite = () => {
     setGuestFavourite((prev) => (prev === null ? true : null));
   };
-  const handleData =()=>{
+  const handleData =(e)=>{
     console.log("magic happens")
     setTest(true)
   }
+  const handleSearchData =(e)=>{
+    e.preventDefault
+    console.log("magic happens in search")
+    setTest(true)
+    getDataOne();
+  }
+  
   const needed = {
     showFilter,
     filterFunction,
@@ -398,7 +405,7 @@ const Search = () => {
   return (
     <div  className="   ">
       {/* search section */}
-      <form onSubmit={handleData} className="fixed z-10 bg-white top-20 min-w-[1780px] border-b pb-6">
+      <form onSubmit={handleSearchData} className="fixed z-10 bg-white top-20 min-w-[1780px] border-b pb-6">
         <div
           className={`${
             isLocationVisible || isCalenderVisible || isCountVisible
