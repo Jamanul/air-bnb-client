@@ -2,6 +2,8 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
+live server : https://air-bnb-client-seven.vercel.app/
+
 First, run the development server:
 test
 test 2
